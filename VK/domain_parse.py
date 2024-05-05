@@ -2,8 +2,8 @@ import pandas as pd
 import psycopg2
 
 csv_source_path = '.\\data\\dump (3).csv'
-csv_target_path = '..\\data\\table_domain.csv'
-csv_target_non_duplicate_path = '..\\data\\non_duplecate_table_domain.csv'
+csv_target_path = '.\\data\\table_domain.csv'
+csv_target_non_duplicate_path = '.\\data\\non_duplecate_table_domain.csv'
 
 def calk_domains():
     print('Start calk domains...')
@@ -38,7 +38,7 @@ def delete_duplecate_domains():
 
 def save_domain_to_db():
     print('Start save domain to db...')
-    conn = psycopg2.connect(dbname='vk_test_home', user='postgres', password='1111', host='localhost', port='5433')
+    conn = psycopg2.connect(dbname='vk_test2', user='postgres', password='1111', host='localhost', port='5433')
     cur = conn.cursor()
     with open(csv_target_non_duplicate_path, 'r') as source_file:
         cur.copy_from(source_file, 'domains', sep=";", columns=('domain',))
@@ -50,4 +50,5 @@ def main():
     calk_domains()
     delete_duplecate_domains()
     save_domain_to_db()
+    
 main()
