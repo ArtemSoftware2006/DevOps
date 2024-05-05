@@ -16,40 +16,25 @@ while True:
         choice = int(input('Enter your choice: '))
         cur = conn.cursor()
         if choice == 1:
-        # добавление данных в таблицу
             ip_var = input("Enter IP: ")
             cur.execute("SELECT domain FROM public.ip_address WHERE ip = %s", (ip_var,))
-
-            pprint(cur.fetchall())
-            print()
-            cur.close()
         elif choice == 2:
             doamin_var = input("Enter domain: ")
             cur.execute("SELECT ip FROM public.ip_address WHERE domain = %s", (doamin_var,))
-            # закрытие соединения
-            pprint(cur.fetchall())
-            print()
-            cur.close()
         elif choice == 3:
             cur.execute("SELECT ip, count(ip) FROM public.ip_address GROUP BY ip ORDER BY count(ip) DESC LIMIT 10;")
-            pprint(cur.fetchall())
-            print()
-            cur.close()
         elif choice == 4:
             cur.execute("select count(ip) from public.ip_address")
-            pprint(cur.fetchall())
-            print()
-            cur.close()
         elif choice == 5:
             cur.execute("select count(domain) from public.ip_address")
-            pprint(cur.fetchall())
-            print()
-            cur.close()
         else: 
             cur.close()
             break
+        pprint(cur.fetchall())
+        print()
+        cur.close()
     except ValueError:
         # How create text red in print
         print("Oops!  That was no valid number.  Try again...")
         continue
-conn.close()
+cur.close()
