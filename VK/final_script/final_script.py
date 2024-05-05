@@ -1,7 +1,7 @@
-import init_db_schema
-import domain_parse
-import ip_parse
-import ips_doamins_parse
+import VK.final_script.init_db_schema as init_db_schema
+import VK.final_script.domain_parse as domain_parse
+import VK.final_script.ip_parse as ip_parse
+import VK.final_script.ips_doamins_parse as ips_doamins_parse
 import psycopg2
 
 conn = psycopg2.connect(dbname='vk_test2', user='postgres', password='1111', host='localhost', port='5433')
