@@ -1,9 +1,9 @@
 import pandas as pd
 import psycopg2
 
-csv_source_path = 'C:\\Users\\Artem\\Downloads\\dump (3).csv'
-csv_target_path = './table_ip.csv'
-csv_target_non_duplicate_path = './non_duplecate_table_ip.csv'
+csv_source_path = '.\\data\\dump (3).csv'
+csv_target_path = '.\\data\\table_ip.csv'
+csv_target_non_duplicate_path = '.\\data\\non_duplecate_table_ip.csv'
 
 def main():
     

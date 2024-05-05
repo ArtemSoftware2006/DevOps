@@ -1,3 +1,6 @@
+# This is my VK lab
+# I developed util for analize ips and domains 
+
 import psycopg2
 # import pprint
 from pprint import pprint

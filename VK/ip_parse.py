@@ -1,15 +1,9 @@
+# Создаю новый csv с колонками ip, домен, url
+# Требуется для корректного импорта таблицы в Postgres 
+# Импорт производил из PgAdmin
+# Работает только до первых 10000 записей. Далее url и домены может быть несколько.
 import pandas as pd
-import psycopg2
 
-# Подключение к базе данных PostgreSQL
-conn = psycopg2.connect(
-    dbname="ip_tables",
-    user="postgres",
-    password="1111",
-    host="localhost",
-    port="5433"
-)
-cur = conn.cursor()
 
 # Чтение CSV файла
 df = pd.read_csv('.\\data\\dump (3).csv',delimiter=';', usecols=[0,1,2], header=None, encoding='cp1251')
@@ -25,7 +19,7 @@ for index, row in df.iterrows():
     ips = row[0].split('|')
 
     for ip in ips:
-        with open('./ip_parse.csv', 'a') as domain_file:
+        with open('.\\data\\ip_parse.csv', 'a') as domain_file:
             if pd.isnull(ip) or pd.isna(ip):
                 domain_file.writelines('\n')
             elif pd.isnull(row[1]) or pd.isna(row[1]):
@@ -41,7 +35,3 @@ for index, row in df.iterrows():
         break
 
 print('You are winner!')
-
-# Закрытие соединения с базой данных
-cur.close()
-conn.close()

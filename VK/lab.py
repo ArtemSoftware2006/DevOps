@@ -1,10 +1,13 @@
 import pandas
-import psycopg2
 import csv 
 from threading import Thread
 
+# The script for test data
+# I am analize how many rows have more then one urls
+# And how many rows have urls
+# And use multithreading because analize is too slow (~20 sec) for each func
 
-csv_source_path = 'C:\\Users\\Artem\\Downloads\\dump (3).csv' 
+csv_source_path = '.\\data\\dump (3).csv' 
 csv.field_size_limit(int(1e6))
 
 def count_urls_more_two_in_row():
@@ -25,7 +28,7 @@ def count_urls_more_two_in_row():
 
     print(count_urls_more_two_in_row)
 
-def count_domains():
+def total_count_urls():
     df = pandas.read_csv(csv_source_path, 
                         delimiter=';', 
                         usecols=[2], 
@@ -44,15 +47,7 @@ def count_domains():
 
 def main():
 
-    conn = psycopg2.connect(
-        dbname="ip_tables",
-        user='postgres',
-        password='1111',
-        host='localhost',
-        port='5433'
-    )
-    
-    th1 = Thread(target=count_domains,args=())
+    th1 = Thread(target=total_count_urls,args=())
     th1.start()
 
     th2 = Thread(target=count_urls_more_two_in_row,args=())
